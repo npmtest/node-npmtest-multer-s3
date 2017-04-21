@@ -1,0 +1,847 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-multer-s3/node_modules/multer-s3/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-multer-s3">npmtest-multer-s3 (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-multer-s3/node_modules/multer-s3/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">17.16% <small>(23 / 134)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 57)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">6.25% <small>(1 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">22.55% <small>(23 / 102)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-multer-s3/node_modules/multer-s3/</a> » index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var crypto = require('crypto')
+var stream = require('stream')
+var fileType = require('file-type')
+var parallel = require('run-parallel')
+&nbsp;
+function staticValue (value) {
+  return <span class="fstat-no" title="function not covered">function (req, file, cb) {</span>
+<span class="cstat-no" title="statement not covered">    cb(null, value)</span>
+  }
+}
+&nbsp;
+var defaultAcl = staticValue('private')
+var defaultContentType = staticValue('application/octet-stream')
+&nbsp;
+var defaultMetadata = staticValue(null)
+var defaultCacheControl = staticValue(null)
+var defaultContentDisposition = staticValue(null)
+var defaultStorageClass = staticValue('STANDARD')
+var defaultSSE = staticValue(null)
+var defaultSSEKMS = staticValue(null)
+&nbsp;
+<span class="fstat-no" title="function not covered">function defaultKey (req, file, cb) {</span>
+<span class="cstat-no" title="statement not covered">  crypto.randomBytes(16, <span class="fstat-no" title="function not covered">function (err, raw) {</span></span>
+<span class="cstat-no" title="statement not covered">    cb(err, err ? undefined : raw.toString('hex'))</span>
+  })
+}
+&nbsp;
+<span class="fstat-no" title="function not covered">function autoContentType (req, file, cb) {</span>
+<span class="cstat-no" title="statement not covered">  file.stream.once('data', <span class="fstat-no" title="function not covered">function (firstChunk) {</span></span>
+<span class="cstat-no" title="statement not covered">    var type = fileType(firstChunk)</span>
+<span class="cstat-no" title="statement not covered">    var mime = (type === null ? 'application/octet-stream' : type.mime)</span>
+<span class="cstat-no" title="statement not covered">    var outStream = new stream.PassThrough()</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    outStream.write(firstChunk)</span>
+<span class="cstat-no" title="statement not covered">    file.stream.pipe(outStream)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    cb(null, mime, outStream)</span>
+  })
+}
+&nbsp;
+<span class="fstat-no" title="function not covered">function collect (storage, req, file, cb) {</span>
+<span class="cstat-no" title="statement not covered">  parallel([</span>
+    storage.getBucket.bind(storage, req, file),
+    storage.getKey.bind(storage, req, file),
+    storage.getAcl.bind(storage, req, file),
+    storage.getMetadata.bind(storage, req, file),
+    storage.getCacheControl.bind(storage, req, file),
+    storage.getContentDisposition.bind(storage, req, file),
+    storage.getStorageClass.bind(storage, req, file),
+    storage.getSSE.bind(storage, req, file),
+    storage.getSSEKMS.bind(storage, req, file)
+  ], <span class="fstat-no" title="function not covered">function (err, values) {</span>
+<span class="cstat-no" title="statement not covered">    if (err) <span class="cstat-no" title="statement not covered">return cb(err)</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    storage.getContentType(req, file, <span class="fstat-no" title="function not covered">function (err, contentType, replacementStream) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (err) <span class="cstat-no" title="statement not covered">return cb(err)</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      cb.call(storage, null, {</span>
+        bucket: values[0],
+        key: values[1],
+        acl: values[2],
+        metadata: values[3],
+        cacheControl: values[4],
+        contentDisposition: values[5],
+        storageClass: values[6],
+        contentType: contentType,
+        replacementStream: replacementStream,
+        serverSideEncryption: values[7],
+        sseKmsKeyId: values[8]
+      })
+    })
+  })
+}
+&nbsp;
+<span class="fstat-no" title="function not covered">function S3Storage (opts) {</span>
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.s3) {</span>
+    case 'object': <span class="cstat-no" title="statement not covered">this.s3 = opts.s3; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.s3 to be object')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.bucket) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getBucket = opts.bucket; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'string': <span class="cstat-no" title="statement not covered">this.getBucket = staticValue(opts.bucket); <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">throw new Error('bucket is required')</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.bucket to be undefined, string or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.key) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getKey = opts.key; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getKey = defaultKey; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.key to be undefined or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.acl) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getAcl = opts.acl; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'string': <span class="cstat-no" title="statement not covered">this.getAcl = staticValue(opts.acl); <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getAcl = defaultAcl; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.acl to be undefined, string or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.contentType) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getContentType = opts.contentType; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getContentType = defaultContentType; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.contentType to be undefined or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.metadata) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getMetadata = opts.metadata; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getMetadata = defaultMetadata; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.metadata to be undefined or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.cacheControl) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getCacheControl = opts.cacheControl; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'string': <span class="cstat-no" title="statement not covered">this.getCacheControl = staticValue(opts.cacheControl); <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getCacheControl = defaultCacheControl; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.cacheControl to be undefined, string or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.contentDisposition) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getContentDisposition = opts.contentDisposition; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'string': <span class="cstat-no" title="statement not covered">this.getContentDisposition = staticValue(opts.contentDisposition); <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getContentDisposition = defaultContentDisposition; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.contentDisposition to be undefined, string or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.storageClass) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getStorageClass = opts.storageClass; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'string': <span class="cstat-no" title="statement not covered">this.getStorageClass = staticValue(opts.storageClass); <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getStorageClass = defaultStorageClass; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.storageClass to be undefined, string or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.serverSideEncryption) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getSSE = opts.serverSideEncryption; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'string': <span class="cstat-no" title="statement not covered">this.getSSE = staticValue(opts.serverSideEncryption); <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getSSE = defaultSSE; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.serverSideEncryption to be undefined, string or function')</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  switch (typeof opts.sseKmsKeyId) {</span>
+    case 'function': <span class="cstat-no" title="statement not covered">this.getSSEKMS = opts.sseKmsKeyId; <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'string': <span class="cstat-no" title="statement not covered">this.getSSEKMS = staticValue(opts.sseKmsKeyId); <span class="cstat-no" title="statement not covered"></span>break</span>
+    case 'undefined': <span class="cstat-no" title="statement not covered">this.getSSEKMS = defaultSSEKMS; <span class="cstat-no" title="statement not covered"></span>break</span>
+    default: <span class="cstat-no" title="statement not covered">throw new TypeError('Expected opts.sseKmsKeyId to be undefined, string, or function')</span>
+  }
+}
+&nbsp;
+S3Storage.prototype._handleFile = <span class="fstat-no" title="function not covered">function (req, file, cb) {</span>
+<span class="cstat-no" title="statement not covered">  collect(this, req, file, <span class="fstat-no" title="function not covered">function (err, opts) {</span></span>
+<span class="cstat-no" title="statement not covered">    if (err) <span class="cstat-no" title="statement not covered">return cb(err)</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var currentSize = 0</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var params = {</span>
+      Bucket: opts.bucket,
+      Key: opts.key,
+      ACL: opts.acl,
+      CacheControl: opts.cacheControl,
+      ContentType: opts.contentType,
+      Metadata: opts.metadata,
+      StorageClass: opts.storageClass,
+      ServerSideEncryption: opts.serverSideEncryption,
+      SSEKMSKeyId: opts.sseKmsKeyId,
+      Body: (opts.replacementStream || file.stream)
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (opts.contentDisposition) {</span>
+<span class="cstat-no" title="statement not covered">      params.ContentDisposition = opts.contentDisposition</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var upload = this.s3.upload(params)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    upload.on('httpUploadProgress', <span class="fstat-no" title="function not covered">function (ev) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (ev.total) <span class="cstat-no" title="statement not covered">currentSize = ev.total</span></span>
+    })
+&nbsp;
+<span class="cstat-no" title="statement not covered">    upload.send(<span class="fstat-no" title="function not covered">function (err, result) {</span></span>
+<span class="cstat-no" title="statement not covered">      if (err) <span class="cstat-no" title="statement not covered">return cb(err)</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">      cb(null, {</span>
+        size: currentSize,
+        bucket: opts.bucket,
+        key: opts.key,
+        acl: opts.acl,
+        contentType: opts.contentType,
+        contentDisposition: opts.contentDisposition,
+        storageClass: opts.storageClass,
+        serverSideEncryption: opts.serverSideEncryption,
+        metadata: opts.metadata,
+        location: result.Location,
+        etag: result.ETag
+      })
+    })
+  })
+}
+&nbsp;
+S3Storage.prototype._removeFile = <span class="fstat-no" title="function not covered">function (req, file, cb) {</span>
+<span class="cstat-no" title="statement not covered">  this.s3.deleteObject({ Bucket: file.bucket, Key: file.key }, cb)</span>
+}
+&nbsp;
+module.exports = <span class="fstat-no" title="function not covered">function (opts) {</span>
+<span class="cstat-no" title="statement not covered">  return new S3Storage(opts)</span>
+}
+&nbsp;
+module.exports.AUTO_CONTENT_TYPE = autoContentType
+module.exports.DEFAULT_CONTENT_TYPE = defaultContentType
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Fri Apr 21 2017 16:38:50 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
